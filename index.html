@@ -16,22 +16,30 @@
 </head>
 <body>
     <button id="buttonRef"> + </button>
+    <input id="inputRef" type="text"></input>
 
     
     <script>
-        let counter = 0;
+        let totalExpense = 0;
         
         // function which is given as a callback to the addEventListener
-        function addFunction() {
-            counter = counter + 1;
-            console.log(counter)
+        function addAmountToTotal() {
+            const inputAmount = document.querySelector("#inputRef");
+            const textAmount = inputAmount.value;
+
+            const amount = parseInt(textAmount)
+
+            totalExpense = totalExpense + amount;
+            console.log( {totalExpense} )
+            
         }
 
         // give reference to the button
+        
         const element = document.querySelector("#buttonRef");
 
         // add an eventListener to the button
-        element.addEventListener("click", addFunction, false)
+        element.addEventListener("click", addAmountToTotal, false)
 
     </script>
 </body>
