@@ -8,6 +8,7 @@
     <style>
         body{
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -15,23 +16,59 @@
     </style>
 </head>
 <body>
-    <button id="buttonRef"> + </button>
+    <h1 id="headingTotal"> </h1>
     <input id="inputRef" type="text"></input>
+    <input id="inputDescRef">
+    <button id="buttonRef"> + </button>
+    <div id="tableRef"></div>
+    
 
     
     <script>
         let totalExpense = 0;
+
+        // givein reference to the html tags
+        const headingTotalExpense = document.querySelector("#headingTotal");
+        const inputAmountRef = document.querySelector("#inputRef");
+        const inputDescRef = document.querySelector("#inputDescRef");
+        const tableRefEl = document.querySelector("#tableRef")
+
+        headingTotalExpense.textContent = totalExpense;
+ 
+        // creating an array to store the value
+        const WishListArr = [];
         
         // function which is given as a callback to the addEventListener
         function addAmountToTotal() {
-            const inputAmount = document.querySelector("#inputRef");
-            const textAmount = inputAmount.value;
-
-            const amount = parseInt(textAmount)
-
-            totalExpense = totalExpense + amount;
-            console.log( {totalExpense} )
+            const wishList = {};
             
+            // reading text amount and desc value from the i/p
+            const textAmount = inputAmountRef.value;
+            const textDesc = inputDescRef.value;
+
+            const amount = parseInt(textAmount);
+
+            //set the expense to total Expense and write it on Dom
+            totalExpense = totalExpense + amount;
+            
+            headingTotalExpense.textContent = totalExpense;
+
+            wishList.desc = textDesc;
+            wishList.amount = amount;
+            WishListArr.push(wishList);
+
+            // to write the table on DOM
+            const data1 = WishListArr[0];
+            const data2 = WishListArr[1];
+
+            const data1El = `${data1.desc}   ::   ${data1.amount}`;
+            const data2El = `${data2.desc}   ::   ${data2.amount}`;
+
+            const table = `
+               <div>${data1El}</div>
+               <div>${data2El}</div>
+            `
+            tableRefEl.innerHTML = table
         }
 
         // give reference to the button
@@ -39,7 +76,7 @@
         const element = document.querySelector("#buttonRef");
 
         // add an eventListener to the button
-        element.addEventListener("click", addAmountToTotal, false)
+        element.addEventListener("click", addAmountToTotal, false);
 
     </script>
 </body>
