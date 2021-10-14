@@ -27,7 +27,7 @@
     <script>
         let totalExpense = 0;
 
-        // givein reference to the html tags
+        // given reference to the html tags
         const headingTotalExpense = document.querySelector("#headingTotal");
         const inputAmountRef = document.querySelector("#inputRef");
         const inputDescRef = document.querySelector("#inputDescRef");
@@ -58,17 +58,15 @@
             WishListArr.push(wishList);
 
             // to write the table on DOM
-            const data1 = WishListArr[0];
-            const data2 = WishListArr[1];
+            const wishTable = WishListArr.map((item) => {
+                return `<div> ${item.desc}   ::   ${item.amount}</div>`
+            })
 
-            const data1El = `${data1.desc}   ::   ${data1.amount}`;
-            const data2El = `${data2.desc}   ::   ${data2.amount}`;
+            const joinedWishTable = wishTable.join("")
+            console.log(joinedWishTable)
 
-            const table = `
-               <div>${data1El}</div>
-               <div>${data2El}</div>
-            `
-            tableRefEl.innerHTML = table
+            tableRefEl.innerHTML = joinedWishTable
+            
         }
 
         // give reference to the button
